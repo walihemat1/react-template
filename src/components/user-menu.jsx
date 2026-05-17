@@ -19,17 +19,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useTranslation } from '@/i18n/use-translation'
 import { formatRole, getInitials } from '@/lib/user'
 import { routes } from '@/routes/routes'
 
 function UserMenu({ onLogout, user }) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const { t } = useTranslation()
+  const displayName = user?.name ?? t('common.user')
 
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
+            aria-label={t('userMenu.accountMenu')}
             className="h-11 gap-3 rounded-xl border border-border bg-background px-2 shadow-xs hover:bg-accent sm:px-3"
             variant="ghost"
           >
@@ -38,10 +42,10 @@ function UserMenu({ onLogout, user }) {
             </span>
             <span className="hidden min-w-0 text-start sm:block">
               <span className="block max-w-36 truncate text-sm font-medium">
-                {user?.name ?? 'User'}
+                {displayName}
               </span>
-              <span className="block max-w-36 truncate text-xs capitalize text-muted-foreground">
-                {formatRole(user?.role)}
+              <span className="block max-w-36 truncate text-xs text-muted-foreground">
+                {formatRole(user?.role, t)}
               </span>
             </span>
             <ChevronDown className="hidden h-4 w-4 text-muted-foreground sm:block" />
@@ -59,14 +63,12 @@ function UserMenu({ onLogout, user }) {
                 {getInitials(user?.name)}
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium">
-                  {user?.name ?? 'User'}
-                </p>
+                <p className="truncate text-sm font-medium">{displayName}</p>
                 <p className="truncate text-xs font-normal text-muted-foreground">
                   {user?.email ?? 'user@example.com'}
                 </p>
                 <p className="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground">
-                  {formatRole(user?.role)}
+                  {formatRole(user?.role, t)}
                 </p>
               </div>
             </div>
@@ -77,40 +79,40 @@ function UserMenu({ onLogout, user }) {
           <DropdownMenuItem asChild>
             <Link to={routes.profile}>
               <User className="h-4 w-4" />
-              Profile
+              {t('nav.profile')}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link to={routes.account}>
               <ShieldCheck className="h-4 w-4" />
-              Account
+              {t('nav.account')}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link to={routes.settings}>
               <Settings className="h-4 w-4" />
-              Settings
+              {t('nav.settings')}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={(event) => event.preventDefault()}>
             <Bell className="h-4 w-4" />
-            Notifications
+            {t('userMenu.notifications')}
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 
           <DropdownMenuItem onSelect={() => setIsConfirmOpen(true)}>
             <LogOut className="h-4 w-4" />
-            Sign out
+            {t('userMenu.signOut')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <ConfirmDialog
-        cancelText="Stay here"
-        confirmText="Sign out"
+        cancelText={t('userMenu.stayHere')}
+        confirmText={t('userMenu.signOut')}
         confirmVariant="destructive"
-        description="You will be signed out of the current session."
+        description={t('userMenu.signOutDescription')}
         icon={LogOut}
         isOpen={isConfirmOpen}
         onCancel={() => setIsConfirmOpen(false)}
@@ -118,7 +120,7 @@ function UserMenu({ onLogout, user }) {
           setIsConfirmOpen(false)
           onLogout()
         }}
-        title="Sign out of your account?"
+        title={t('userMenu.signOutTitle')}
       />
     </>
   )

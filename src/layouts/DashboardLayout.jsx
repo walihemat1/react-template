@@ -23,12 +23,12 @@ function DashboardLayout() {
       <div
         className={cn(
           'transition-[padding] duration-200 md:ps-72',
-          isSidebarCollapsed && 'md:ps-20',
+          isSidebarCollapsed && 'md:ps-[4.75rem]',
         )}
       >
         <AppHeader user={user} onLogout={() => dispatch(logout())} />
-        <main className="px-4 py-8 sm:px-6">
-          <div className="mx-auto w-full max-w-5xl">
+        <main className="px-4 py-6 sm:px-6 lg:py-8">
+          <div className="page-container">
             <Outlet />
           </div>
         </main>

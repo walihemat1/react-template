@@ -13,11 +13,13 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { mockNotifications } from '@/config/notifications'
+import { mockNotificationKeys } from '@/config/notifications'
+import { useTranslation } from '@/i18n/use-translation'
 import { cn } from '@/lib/utils'
 
 function NotificationMenu() {
-  const [notifications, setNotifications] = useState(mockNotifications)
+  const { t } = useTranslation()
+  const [notifications, setNotifications] = useState(mockNotificationKeys)
   const unreadCount = notifications.filter((item) => item.unread).length
 
   function markAllAsRead() {
@@ -26,11 +28,16 @@ function NotificationMenu() {
     )
   }
 
+  const notificationsLabel =
+    unreadCount > 0
+      ? t('notifications.labelWithCount', { count: unreadCount })
+      : t('notifications.label')
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          aria-label="Notifications"
+          aria-label={notificationsLabel}
           className="relative h-11 w-11 rounded-2xl border border-border/80 bg-background/80 shadow-sm hover:bg-accent"
           size="icon"
           variant="ghost"
@@ -48,9 +55,9 @@ function NotificationMenu() {
         <div className="border-b border-border px-4 py-3">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="font-medium">Notifications</p>
+              <p className="font-medium">{t('notifications.title')}</p>
               <p className="text-xs text-muted-foreground">
-                {unreadCount} unread
+                {t('notifications.unread', { count: unreadCount })}
               </p>
             </div>
             <Button
@@ -60,7 +67,7 @@ function NotificationMenu() {
               onClick={markAllAsRead}
             >
               <CheckCircle2 className="h-4 w-4" />
-              Mark all as read
+              {t('notifications.markAllRead')}
             </Button>
           </div>
         </div>
@@ -69,9 +76,9 @@ function NotificationMenu() {
           {notifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-2 px-4 py-8 text-center">
               <Sparkles className="h-5 w-5 text-muted-foreground" />
-              <p className="font-medium">No notifications</p>
+              <p className="font-medium">{t('notifications.emptyTitle')}</p>
               <p className="text-sm text-muted-foreground">
-                You are all caught up for now.
+                {t('notifications.emptyDescription')}
               </p>
             </div>
           ) : (
@@ -93,17 +100,17 @@ function NotificationMenu() {
                   <span className="min-w-0 flex-1">
                     <span className="flex items-start justify-between gap-2">
                       <span className="truncate text-sm font-medium">
-                        {item.title}
+                        {t(item.titleKey)}
                       </span>
                       {item.unread ? (
                         <Circle className="mt-1 h-2.5 w-2.5 fill-primary text-primary" />
                       ) : null}
                     </span>
                     <span className="mt-1 block text-xs text-muted-foreground">
-                      {item.description}
+                      {t(item.descriptionKey)}
                     </span>
                     <span className="mt-2 block text-[11px] uppercase tracking-wide text-muted-foreground">
-                      {item.timestamp}
+                      {t(item.timestampKey)}
                     </span>
                   </span>
                 </button>
@@ -114,7 +121,7 @@ function NotificationMenu() {
 
         <div className="border-t border-border p-2">
           <Button className="w-full rounded-xl" variant="ghost">
-            View all notifications
+            {t('notifications.viewAll')}
             <ExternalLink className="h-4 w-4" />
           </Button>
         </div>

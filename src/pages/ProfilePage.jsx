@@ -1,10 +1,12 @@
+import { useTranslation } from '@/i18n/use-translation'
+
 function ProfilePage() {
+  const { t } = useTranslation()
+
   return (
     <section className="space-y-3">
-      <h1 className="text-3xl font-semibold">Profile</h1>
-      <p className="text-muted-foreground">
-        A simple placeholder page for your profile details.
-      </p>
+      <h1 className="text-3xl font-semibold">{t('profile.title')}</h1>
+      <p className="text-muted-foreground">{t('profile.description')}</p>
     </section>
   )
 }

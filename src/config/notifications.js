@@ -1,36 +1,36 @@
 import { CheckCircle2, Settings2, ShieldCheck, UserPlus } from 'lucide-react'
 
-export const mockNotifications = [
+export const mockNotificationKeys = [
   {
     id: 1,
     icon: UserPlus,
-    title: 'New user joined',
-    description: 'Sara Khan was added to the workspace.',
-    timestamp: '2 min ago',
+    titleKey: 'notifications.items.newUser.title',
+    descriptionKey: 'notifications.items.newUser.description',
+    timestampKey: 'notifications.items.newUser.timestamp',
     unread: true,
   },
   {
     id: 2,
     icon: ShieldCheck,
-    title: 'Permission updated',
-    description: 'Admin access was updated for Omar Aziz.',
-    timestamp: '1 hour ago',
+    titleKey: 'notifications.items.permission.title',
+    descriptionKey: 'notifications.items.permission.description',
+    timestampKey: 'notifications.items.permission.timestamp',
     unread: true,
   },
   {
     id: 3,
     icon: Settings2,
-    title: 'Settings changed',
-    description: 'Theme preferences were updated successfully.',
-    timestamp: 'Today',
+    titleKey: 'notifications.items.settings.title',
+    descriptionKey: 'notifications.items.settings.description',
+    timestampKey: 'notifications.items.settings.timestamp',
     unread: false,
   },
   {
     id: 4,
     icon: CheckCircle2,
-    title: 'Backup completed',
-    description: 'Your latest backup finished without issues.',
-    timestamp: 'Yesterday',
+    titleKey: 'notifications.items.backup.title',
+    descriptionKey: 'notifications.items.backup.description',
+    timestampKey: 'notifications.items.backup.timestamp',
     unread: false,
   },
 ]

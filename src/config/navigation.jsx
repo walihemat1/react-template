@@ -2,15 +2,17 @@ import { LayoutDashboard, Settings, Users } from 'lucide-react'
 
 export const sidebarSections = [
   {
-    label: 'General',
-    items: [{ to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard }],
+    labelKey: 'nav.general',
+    items: [
+      { to: '/dashboard', labelKey: 'nav.dashboard', icon: LayoutDashboard },
+    ],
   },
   {
-    label: 'Pages',
-    items: [{ to: '/users', label: 'Users', icon: Users }],
+    labelKey: 'nav.pages',
+    items: [{ to: '/users', labelKey: 'nav.users', icon: Users }],
   },
   {
-    label: 'Other',
-    items: [{ to: '/settings', label: 'Settings', icon: Settings }],
+    labelKey: 'nav.other',
+    items: [{ to: '/settings', labelKey: 'nav.settings', icon: Settings }],
   },
 ]

@@ -1,9 +1,30 @@
 import { api } from '@/services/api'
 
 let users = [
-  { id: 1, name: 'Ali Ahmad', email: 'ali@example.com', role: 'admin' },
-  { id: 2, name: 'Sara Khan', email: 'sara@example.com', role: 'manager' },
-  { id: 3, name: 'Omar Aziz', email: 'omar@example.com', role: 'user' },
+  {
+    id: 1,
+    name: 'Ali Ahmad',
+    email: 'ali@example.com',
+    role: 'admin',
+    status: 'active',
+    joined: '2025-02-15',
+  },
+  {
+    id: 2,
+    name: 'Sara Khan',
+    email: 'sara@example.com',
+    role: 'manager',
+    status: 'active',
+    joined: '2025-04-12',
+  },
+  {
+    id: 3,
+    name: 'Omar Aziz',
+    email: 'omar@example.com',
+    role: 'user',
+    status: 'active',
+    joined: '2025-03-28',
+  },
 ]
 
 function getNextUserId() {
@@ -21,7 +42,7 @@ export const usersApi = api.injectEndpoints({
         const user = users.find((item) => item.id === Number(id))
 
         if (!user) {
-          return { error: { message: 'User not found' } }
+          return { error: { message: 'users.notFound' } }
         }
 
         return { data: user }
@@ -32,6 +53,8 @@ export const usersApi = api.injectEndpoints({
       queryFn: (newUser) => {
         const user = {
           id: getNextUserId(),
+          status: 'active',
+          joined: new Date().toISOString().slice(0, 10),
           ...newUser,
         }
 
@@ -46,7 +69,7 @@ export const usersApi = api.injectEndpoints({
         const user = users.find((item) => item.id === Number(id))
 
         if (!user) {
-          return { error: { message: 'User not found' } }
+          return { error: { message: 'users.notFound' } }
         }
 
         users = users.map((item) =>

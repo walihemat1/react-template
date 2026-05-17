@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 
 function ConfirmDialog({
   cancelText = 'Cancel',
+  confirmDisabled = false,
   confirmText = 'Confirm',
   confirmVariant = 'default',
   description,
@@ -16,7 +17,12 @@ function ConfirmDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/45 p-4 backdrop-blur-[2px]">
+    <div
+      aria-labelledby="confirm-dialog-title"
+      aria-modal="true"
+      className="fixed inset-0 z-50 grid place-items-center bg-black/45 p-4 backdrop-blur-[2px]"
+      role="dialog"
+    >
       <div className="w-full max-w-[28rem] rounded-3xl border border-border bg-background p-6 shadow-2xl">
         <div className="space-y-3">
           {Icon ? (
@@ -24,7 +30,9 @@ function ConfirmDialog({
               <Icon className="h-5 w-5" />
             </div>
           ) : null}
-          <h2 className="text-lg font-semibold">{title}</h2>
+          <h2 className="text-lg font-semibold" id="confirm-dialog-title">
+            {title}
+          </h2>
           {description ? (
             <p className="text-sm text-muted-foreground">{description}</p>
           ) : null}
@@ -36,6 +44,7 @@ function ConfirmDialog({
           </Button>
           <Button
             className="rounded-xl"
+            disabled={confirmDisabled}
             variant={confirmVariant}
             onClick={onConfirm}
           >

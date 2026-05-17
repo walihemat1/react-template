@@ -1,14 +1,27 @@
-function PageHeader({ title, description, actions }) {
+import { cn } from '@/lib/utils'
+
+function PageHeader({ className, title, description, actions }) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-semibold">{title}</h1>
+    <div
+      className={cn(
+        'flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between',
+        className,
+      )}
+    >
+      <div className="space-y-1.5">
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h1>
         {description ? (
-          <p className="text-muted-foreground">{description}</p>
+          <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+            {description}
+          </p>
         ) : null}
       </div>
 
-      {actions ? <div className="flex gap-2">{actions}</div> : null}
+      {actions ? (
+        <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>
+      ) : null}
     </div>
   )
 }

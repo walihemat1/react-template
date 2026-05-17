@@ -1,7 +1,13 @@
+import { DocumentTitle } from '@/app/document-title'
 import { AppRoutes } from '@/routes/AppRoutes'
 
 function App() {
-  return <AppRoutes />
+  return (
+    <>
+      <DocumentTitle />
+      <AppRoutes />
+    </>
+  )
 }
 
 export default App

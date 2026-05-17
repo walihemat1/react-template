@@ -8,21 +8,23 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useTranslation } from '@/i18n/use-translation'
 
 function LanguageSwitcher() {
   const { language, languages, setLanguage } = useLanguage()
+  const { t } = useTranslation()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          aria-label="Language"
+          aria-label={t('language.label')}
           className="h-10 gap-2 rounded-xl border border-border bg-background px-3 shadow-xs hover:bg-accent"
           variant="ghost"
         >
           <Languages className="h-4 w-4" />
           <span className="hidden text-sm sm:inline">
-            {languages[language]?.label}
+            {languages[language]?.nativeLabel}
           </span>
         </Button>
       </DropdownMenuTrigger>
@@ -33,7 +35,7 @@ function LanguageSwitcher() {
             checked={language === value}
             onCheckedChange={() => setLanguage(value)}
           >
-            {item.label}
+            {item.nativeLabel}
           </DropdownMenuCheckboxItem>
         ))}
       </DropdownMenuContent>

@@ -14,7 +14,7 @@ function createUser(email) {
 
 export async function loginUser({ email, password }) {
   if (!email || !password) {
-    throw new Error('Email and password are required.')
+    throw new Error('auth.credentialsRequired')
   }
 
   const user = createUser(email)
